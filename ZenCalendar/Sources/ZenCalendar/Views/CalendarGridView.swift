@@ -6,7 +6,7 @@ struct CalendarGridView: View {
     private let columns = Array(repeating: GridItem(.flexible(), spacing: 0), count: 7)
     
     var body: some View {
-        LazyVGrid(columns: columns, spacing: 6) {
+        LazyVGrid(columns: columns, spacing: 12) {
             ForEach(calendarLogic.generateDaysInMonth(), id: \.self) { date in
                 DayCell(
                     date: date,

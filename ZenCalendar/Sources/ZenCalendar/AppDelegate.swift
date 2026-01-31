@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Initialize Transparent Panel
-        let panelSize = NSSize(width: 320, height: 500)
+        let panelSize = NSSize(width: 320, height: 560)
         panel = TransparentPanel(contentRect: NSRect(origin: .zero, size: panelSize))
         
         // Host SwiftUI view
@@ -83,6 +83,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ])
         
         panel.contentView = visualEffectView
+        
+        // Register panel with manager for dynamic resizing
+        PanelManager.shared.panel = panel
     }
     
     @objc func handleStatusItemClick(_ sender: AnyObject?) {

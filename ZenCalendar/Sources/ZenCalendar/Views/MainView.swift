@@ -82,6 +82,20 @@ struct MainView: View {
                     .zIndex(100) // Ensure it's on top
             }
         }
+        // Force top alignment to prevent vertical jumping
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        // Measure content size
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .preference(key: HeightPreferenceKey.self, value: geo.size.height)
+            }
+        )
+        .onPreferenceChange(HeightPreferenceKey.self) { height in
+            DispatchQueue.main.async {
+                PanelManager.shared.updateHeight(height)
+            }
+        }
     }
     
     private func monthTitle(for date: Date) -> String {
@@ -89,5 +103,13 @@ struct MainView: View {
         formatter.dateFormat = "yyyy年 MMMM"
         formatter.locale = Locale(identifier: "zh_CN")
         return formatter.string(from: date)
+    }
+}
+
+// Preference Key for passing height up
+struct HeightPreferenceKey: PreferenceKey {
+    static var defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = nextValue()
     }
 }

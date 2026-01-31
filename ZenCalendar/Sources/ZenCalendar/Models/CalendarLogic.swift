@@ -66,4 +66,10 @@ class CalendarLogic: ObservableObject {
     func isSameMonth(date1: Date, date2: Date) -> Bool {
         calendar.isDate(date1, equalTo: date2, toGranularity: .month)
     }
+    
+    /// Returns the number of weeks (rows) needed to display the current month
+    var numberOfWeeks: Int {
+        let days = generateDaysInMonth()
+        return days.count / 7
+    }
 }

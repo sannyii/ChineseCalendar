@@ -92,8 +92,6 @@ struct AlmanacPanel: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 24)
-            
-            Spacer(minLength: 0)
         }
         // Diagonal gradient background - very subtle, lighter than calendar
         .background(
