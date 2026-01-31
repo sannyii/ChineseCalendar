@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         // Initialize Transparent Panel
-        let panelSize = NSSize(width: 320, height: 560)
+        let panelSize = NSSize(width: 320, height: 520)
         panel = TransparentPanel(contentRect: NSRect(origin: .zero, size: panelSize))
         
         // Host SwiftUI view

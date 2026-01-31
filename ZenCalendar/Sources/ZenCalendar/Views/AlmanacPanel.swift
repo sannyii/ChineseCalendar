@@ -12,49 +12,43 @@ struct AlmanacPanel: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            // No divider - natural spacing only
-            
-            VStack(alignment: .leading, spacing: 4) {
-                // Header: Solar Date & Lunar Year
-                HStack(alignment: .lastTextBaseline) {
-                    Text(formatSelectedDate())
-                        .font(.system(size: 20, weight: .semibold, design: .default))
-                        .foregroundColor(.primary.opacity(0.9))
-                    
-                    Spacer()
-                    
-                    Text("\(lunarDate.year) 【\(lunarDate.zodiac)年】")
-                        .font(.system(size: 13, weight: .regular))
-                        .foregroundColor(.primary.opacity(0.6))
-                }
+        VStack(alignment: .leading, spacing: 8) {
+            // Header: Solar Date & Lunar Year
+            HStack(alignment: .lastTextBaseline) {
+                Text(formatSelectedDate())
+                    .font(.system(size: 20, weight: .semibold, design: .default))
+                    .foregroundColor(.primary.opacity(0.9))
                 
-                // Subheader: Lunar Day
-                HStack {
-                    Text("\(lunarDate.month)\(lunarDate.day)")
-                        .font(.system(size: 15))
-                        .foregroundColor(.primary.opacity(0.8))
-                    
-                    if let festival = lunarDate.festival {
-                        Text(festival)
-                            .font(.system(size: 11, weight: .bold))
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.red.opacity(0.1))
-                            .foregroundColor(.red)
-                            .cornerRadius(4)
-                    } else if let term = lunarDate.solarTerm {
-                        Text(term)
-                            .font(.system(size: 11))
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(Color.primary.opacity(0.1))
-                            .cornerRadius(4)
-                    }
+                Spacer()
+                
+                Text("\(lunarDate.year) 【\(lunarDate.zodiac)年】")
+                    .font(.system(size: 13, weight: .regular))
+                    .foregroundColor(.primary.opacity(0.6))
+            }
+            
+            // Subheader: Lunar Day
+            HStack {
+                Text("\(lunarDate.month)\(lunarDate.day)")
+                    .font(.system(size: 15))
+                    .foregroundColor(.primary.opacity(0.8))
+                
+                if let festival = lunarDate.festival {
+                    Text(festival)
+                        .font(.system(size: 11, weight: .bold))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.red.opacity(0.1))
+                        .foregroundColor(.red)
+                        .cornerRadius(4)
+                } else if let term = lunarDate.solarTerm {
+                    Text(term)
+                        .font(.system(size: 11))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.primary.opacity(0.1))
+                        .cornerRadius(4)
                 }
             }
-            .padding(.horizontal, 24)
-            .padding(.top, 16)
             
             // Yi / Ji Section
             HStack(alignment: .top, spacing: 20) {
@@ -90,11 +84,9 @@ struct AlmanacPanel: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 24)
-            .frame(height: 128, alignment: .top) // FIXED HEIGHT MATCHING ESTIMATION
         }
-        // Diagonal gradient background - very subtle, lighter than calendar
+        .padding(.horizontal, 24)
+        .padding(.vertical, 16)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
