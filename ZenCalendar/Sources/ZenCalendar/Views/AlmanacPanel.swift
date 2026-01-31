@@ -92,6 +92,7 @@ struct AlmanacPanel: View {
             }
             .padding(.horizontal, 24)
             .padding(.bottom, 24)
+            .frame(height: 160, alignment: .top) // FIXED HEIGHT MATCHING ESTIMATION
         }
         // Diagonal gradient background - very subtle, lighter than calendar
         .background(
