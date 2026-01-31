@@ -89,8 +89,8 @@ struct MainView: View {
                 // --- 3. Calendar Grid (Dynamic Height) ---
                 CalendarGridView(calendarLogic: calendarLogic)
                     .padding(.horizontal, horizontalPadding)
-                    // Grid height is determined by AspectRatio(1) cells.
-                    // Width = (320 - 48) / 7 = 38.85
+                    .id(calendarLogic.currentMonth) // Trigger transition
+                    .transition(.opacity.animation(.easeInOut(duration: 0.2)))
                     
                 // --- 4. Almanac (Bottom Anchor) ---
                 AlmanacPanel(selectedDate: calendarLogic.selectedDate)
@@ -127,13 +127,8 @@ struct MainView: View {
         let gridHeight = (weeks * cellHeight) + ((weeks - 1) * 12) // 12 is grid spacing in CalendarGridView
         
         // Almanac Height estimation
-        // Top Space (16) + Line 1 (24) + Spacing (4) + Line 2 (18) + Pad(16) + YiJi(50?) + Bot(24)
-        // This is tricky. Let's start with a fixed 'safe' height or measure it once?
-        // Actually AlmanacPanel content is roughly constant:
-        // PAddings + 3 lines of text + Yi/Ji row.
-        // Let's assume a fixed height for calculation: approx 150.
-        // Better: Make AlmanacPanel fixed height internally too?
-        let almanacEstHeight: CGFloat = 160 
+        // Reduced from 160 to 128 to remove empty space
+        let almanacEstHeight: CGFloat = 128 
         
         let total = headerTopPadding + headerHeight + headerBottomPadding +
                     weekdayHeight + weekdayBottomPadding +
