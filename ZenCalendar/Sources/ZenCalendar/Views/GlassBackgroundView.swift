@@ -2,12 +2,8 @@ import SwiftUI
 
 struct GlassBackgroundView: View {
     var body: some View {
-        ZStack {
-            // Transparent background with blur
-            VisualEffectView(material: .sidebar, blendingMode: .behindWindow)
-                .edgesIgnoringSafeArea(.all)
-        }
-        .background(TransparentWindowBackground())
+        // Fully transparent - the NSPanel's NSVisualEffectView handles the blur
+        Color.clear
     }
 }
 

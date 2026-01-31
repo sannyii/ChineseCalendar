@@ -12,9 +12,8 @@ struct AlmanacPanel: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Divider()
-                .background(Color.primary.opacity(0.1))
+        VStack(alignment: .leading, spacing: 12) {
+            // No divider - natural spacing only
             
             VStack(alignment: .leading, spacing: 4) {
                 // Header: Solar Date & Lunar Year
@@ -55,6 +54,7 @@ struct AlmanacPanel: View {
                 }
             }
             .padding(.horizontal, 24)
+            .padding(.top, 16)
             
             // Yi / Ji Section
             HStack(alignment: .top, spacing: 20) {
@@ -93,10 +93,20 @@ struct AlmanacPanel: View {
             .padding(.horizontal, 24)
             .padding(.bottom, 24)
             
-            Spacer(minLength: 0) // Push content to top
+            Spacer(minLength: 0)
         }
-        // No background, just transparency
-        .background(Color.clear)
+        // Diagonal gradient background - very subtle, lighter than calendar
+        .background(
+            LinearGradient(
+                gradient: Gradient(colors: [
+                    Color.primary.opacity(0.01),
+                    Color.blue.opacity(0.015),
+                    Color.purple.opacity(0.01)
+                ]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+        )
     }
     
     private func formatSelectedDate() -> String {
