@@ -43,7 +43,7 @@ struct MainView: View {
                     .buttonStyle(.plain)
                 }
                 .padding(.horizontal, 24)
-                .padding(.top, 20)
+                .padding(.top, 36)
                 .padding(.bottom, 16)
                 
                 // --- 2. Weekdays ---

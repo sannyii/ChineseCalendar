@@ -102,7 +102,7 @@ struct DayCell: View {
                             }
                         }
                     }
-                    .padding(.top, 10) // Approx 3px higher than the number text visual line (assuming centered selection)
+                    .padding(.top, 2) // Position badges at very top of cell
                     Spacer()
                 }
             }

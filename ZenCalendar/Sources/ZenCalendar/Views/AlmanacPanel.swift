@@ -86,7 +86,8 @@ struct AlmanacPanel: View {
             }
         }
         .padding(.horizontal, 24)
-        .padding(.vertical, 16)
+        .padding(.top, 16)
+        .padding(.bottom, 36)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [
