@@ -35,24 +35,21 @@ class CalendarLogic: ObservableObject {
         selectedDate = now
     }
     
-    /// Generates the days to display in the grid (including padding for previous/next months)
+    /// Generates the days to display in the grid - ALWAYS returns 42 days (6 weeks)
     func generateDaysInMonth() -> [Date] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: currentMonth),
-              let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start),
-              let monthLastWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.end - 1) else {
+              let monthFirstWeek = calendar.dateInterval(of: .weekOfMonth, for: monthInterval.start) else {
             return []
         }
         
-        let dateInterval = DateInterval(start: monthFirstWeek.start, end: monthLastWeek.end)
+        // Always start from the first day of the first week
+        let startDate = monthFirstWeek.start
         
         var days: [Date] = []
-        calendar.enumerateDates(startingAfter: dateInterval.start - 1, matching: DateComponents(hour: 0, minute: 0, second: 0), matchingPolicy: .nextTime) { date, _, stop in
-            if let date = date {
-                if date < dateInterval.end {
-                    days.append(date)
-                } else {
-                    stop = true
-                }
+        // Always generate exactly 42 days (6 weeks)
+        for i in 0..<42 {
+            if let date = calendar.date(byAdding: .day, value: i, to: startDate) {
+                days.append(date)
             }
         }
         
